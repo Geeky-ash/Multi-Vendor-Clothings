@@ -1,29 +1,38 @@
-import Image from "next/image";
+import React from "react";
 
 interface ProductCardProps {
+  image: string;
   name: string;
   price: number;
-  imageUrl: string;
+  onBuyOnline?: () => void;
+  onVisitShop?: () => void;
 }
 
-export default function ProductCard({ name, price, imageUrl }: ProductCardProps) {
-  return (
-    <div className="border rounded-lg overflow-hidden shadow-sm">
-      <div className="aspect-square bg-gray-100 relative w-full">
-        <Image src={imageUrl} alt={name} layout="fill" objectFit="cover" />
-      </div>
-      <div className="p-4">
-        <h3 className="font-semibold text-gray-800">{name}</h3>
-        <p className="text-lg font-bold text-gray-900 mt-1">₹{price.toFixed(2)}</p>
-        <div className="flex space-x-2 mt-4">
-          <button className="flex-1 bg-blue-600 text-white text-sm py-2 px-4 rounded-md hover:bg-blue-700">
-            🛍️ Buy Online
-          </button>
-          <button className="flex-1 bg-gray-200 text-gray-800 text-sm py-2 px-4 rounded-md hover:bg-gray-300">
-            🧭 Visit Shop
-          </button>
-        </div>
-      </div>
+const ProductCard: React.FC<ProductCardProps> = ({ image, name, price, onBuyOnline, onVisitShop }) => (
+  <div className="bg-white rounded-xl shadow hover:shadow-lg transition p-4 mb-4">
+    <img
+      src={image}
+      alt={name}
+      className="w-full h-40 object-cover rounded-xl mb-4"
+      loading="lazy"
+    />
+    <h4 className="font-medium text-base truncate mb-1">{name}</h4>
+    <div className="text-xl font-bold text-primary mb-3">&#8377;{price}</div>
+    <div className="flex gap-3">
+      <button
+        onClick={onBuyOnline}
+        className="flex-1 bg-primary text-white rounded-xl py-2 font-semibold hover:bg-primary-dark transition"
+      >
+        Buy Online
+      </button>
+      <button
+        onClick={onVisitShop}
+        className="flex-1 bg-gray-200 text-gray-700 rounded-xl py-2 font-semibold hover:bg-gray-300 transition"
+      >
+        Visit Shop
+      </button>
     </div>
-  );
-}
+  </div>
+);
+
+export default ProductCard;

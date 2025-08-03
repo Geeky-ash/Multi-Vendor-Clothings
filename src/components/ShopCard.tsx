@@ -1,25 +1,27 @@
-import Image from "next/image";
-import Link from "next/link";
+import React from "react";
 
 interface ShopCardProps {
-  shopId: string;
+  image: string;
   name: string;
-  imageUrl: string;
+  category?: string;
+  onClick?: () => void;
+  isActive?: boolean;
 }
 
-export default function ShopCard({ shopId, name, imageUrl }: ShopCardProps) {
-  return (
-    <Link href={`/shop/${shopId}`} className="block group">
-      <div className="aspect-square w-full bg-gray-100 rounded-lg overflow-hidden shadow-sm transition-shadow duration-300 group-hover:shadow-md">
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={200}
-          height={200}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <h3 className="mt-2 text-md font-semibold text-gray-900">{name}</h3>
-    </Link>
-  );
-}
+const ShopCard: React.FC<ShopCardProps> = ({ image, name, category, onClick }) => (
+  <div
+    onClick={onClick}
+    className="bg-white rounded-xl shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden p-4 mb-4"
+  >
+    <img
+      src={image}
+      alt={name}
+      className="w-full h-36 object-cover rounded-xl mb-4"
+      loading="lazy"
+    />
+    <h3 className="text-lg font-semibold truncate mb-1">{name}</h3>
+    {category && <p className="text-sm text-gray-500">{category}</p>}
+  </div>
+);
+
+export default ShopCard;

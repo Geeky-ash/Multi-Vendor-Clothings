@@ -11,9 +11,15 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+
+        // Add your primary color(s) here:
+        primary: "#0f91f2",
+        "primary-dark": "#0b71bc",
       },
     },
   },
   plugins: [],
 };
+
 export default config;
+
